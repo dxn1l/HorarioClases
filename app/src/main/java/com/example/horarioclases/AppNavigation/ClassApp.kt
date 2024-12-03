@@ -5,6 +5,7 @@ import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -16,8 +17,12 @@ import com.example.horarioclases.Screen.HomeScreen
 import com.example.horarioclases.ui.theme.HorarioClasesTheme
 import androidx.compose.ui.Modifier
 import com.example.horarioclases.DataBase.FirebaseClaseRepository
+import com.example.horarioclases.Screen.ActualClassScreen
 import com.example.horarioclases.Screen.AddClassScreen
 import com.example.horarioclases.Screen.ViewClassScreen
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.*
 
 @RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
@@ -34,7 +39,15 @@ fun ClassApp() {
                         Screen.Home -> "Home"
                         Screen.AddClass -> "Añadir Clase"
                         Screen.ViewClass -> "Consultar Horario"
-                    }) }
+                        Screen.ActualClass -> "Clase Actual"
+                    }) },
+                    navigationIcon = {
+                        if (currentScreen != Screen.Home) {
+                            IconButton(onClick = { currentScreen = Screen.Home }) {
+                                Icon(Icons.Filled.ArrowBack, contentDescription = "Atrás")
+                            }
+                        }
+                    }
 
                 )
             }
@@ -43,7 +56,7 @@ fun ClassApp() {
                 Screen.Home -> HomeScreen(
                     onAddClassClick = { currentScreen = Screen.AddClass },
                     onViewScheduleClick = { currentScreen = Screen.ViewClass },
-                    onCurrentClassClick = { },
+                    onCurrentClassClick = { currentScreen = Screen.ActualClass },
                     modifier = Modifier.padding(padding)
                 )
                 Screen.AddClass -> AddClassScreen(
@@ -56,6 +69,10 @@ fun ClassApp() {
                     repository = repository,
                     modifier = Modifier.padding(padding)
                 )
+                Screen.ActualClass -> ActualClassScreen(
+                    repository = repository,
+                    modifier = Modifier.padding(padding)
+                )
             }
         }
     }
@@ -64,5 +81,6 @@ fun ClassApp() {
 enum class Screen {
     Home,
     AddClass,
-    ViewClass
+    ViewClass,
+    ActualClass
 }
