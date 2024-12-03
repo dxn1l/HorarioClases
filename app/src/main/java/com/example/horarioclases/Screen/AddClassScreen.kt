@@ -13,8 +13,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.horarioclases.DataBase.Clase
 import com.example.horarioclases.DataBase.FirebaseClaseRepository
-import java.time.LocalTime
-import java.time.format.DateTimeFormatter
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -23,7 +21,6 @@ fun AddClassScreen(
     modifier: Modifier = Modifier
 ) {
     val repository = FirebaseClaseRepository()
-    val timeFormatter = DateTimeFormatter.ofPattern("HH:mm")
 
     var id by remember { mutableStateOf("") }
     var nombre by remember { mutableStateOf("") }
@@ -172,8 +169,8 @@ fun AddClassScreen(
                     val clase = Clase(
                         id = id,
                         nombre = nombre,
-                        horarioInicio = LocalTime.parse(horarioInicio, timeFormatter),
-                        horarioFinal = LocalTime.parse(horarioFinal, timeFormatter),
+                        horarioInicio = horarioInicio,
+                        horarioFinal = horarioFinal,
                         dia = dia,
                         profesor = profesor,
                         aula = aula

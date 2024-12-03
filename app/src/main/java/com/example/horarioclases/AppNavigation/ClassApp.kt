@@ -1,5 +1,7 @@
 package com.example.horarioclases.AppNavigation
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -13,12 +15,16 @@ import androidx.compose.runtime.setValue
 import com.example.horarioclases.Screen.HomeScreen
 import com.example.horarioclases.ui.theme.HorarioClasesTheme
 import androidx.compose.ui.Modifier
+import com.example.horarioclases.DataBase.FirebaseClaseRepository
 import com.example.horarioclases.Screen.AddClassScreen
+import com.example.horarioclases.Screen.ViewClassScreen
 
+@RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ClassApp() {
     var currentScreen by remember { mutableStateOf(Screen.Home) }
+    val repository = FirebaseClaseRepository()
 
     HorarioClasesTheme {
         Scaffold(
@@ -27,6 +33,7 @@ fun ClassApp() {
                     title = {  Text(when (currentScreen) {
                         Screen.Home -> "Home"
                         Screen.AddClass -> "Añadir Clase"
+                        Screen.ViewClass -> "Consultar Horario"
                     }) }
 
                 )
@@ -35,7 +42,7 @@ fun ClassApp() {
             when (currentScreen) {
                 Screen.Home -> HomeScreen(
                     onAddClassClick = { currentScreen = Screen.AddClass },
-                    onViewScheduleClick = { },
+                    onViewScheduleClick = { currentScreen = Screen.ViewClass },
                     onCurrentClassClick = { },
                     modifier = Modifier.padding(padding)
                 )
@@ -45,6 +52,10 @@ fun ClassApp() {
                     },
                     modifier = Modifier.padding(padding)
                 )
+                Screen.ViewClass -> ViewClassScreen(
+                    repository = repository,
+                    modifier = Modifier.padding(padding)
+                )
             }
         }
     }
@@ -52,5 +63,6 @@ fun ClassApp() {
 
 enum class Screen {
     Home,
-    AddClass
+    AddClass,
+    ViewClass
 }

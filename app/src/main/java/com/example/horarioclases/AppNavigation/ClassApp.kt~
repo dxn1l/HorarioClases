@@ -40,7 +40,7 @@ fun ClassApp() {
                     modifier = Modifier.padding(padding)
                 )
                 Screen.AddClass -> AddClassScreen(
-                    onAddClass = { _ ->
+                    onAddClass = {
                         currentScreen = Screen.Home
                     },
                     modifier = Modifier.padding(padding)
