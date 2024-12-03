@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "527601961160",
+    "firebase_url": "https://horarioclases-611e1-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "horarioclases-611e1",
+    "storage_bucket": "horarioclases-611e1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:527601961160:android:509988fad01c8048fbbdfd",
+        "android_client_info": {
+          "package_name": "com.example.horarioclases"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8Irk9N9ZhPWgkH5WTq_RQ2QzqPo45hSM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
