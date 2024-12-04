@@ -39,10 +39,6 @@ fun AddClassScreen(
     var profesorError by remember { mutableStateOf(false) }
     var formError by remember { mutableStateOf(false) }
 
-    fun isValidTime(time: String): Boolean {
-        return time.matches(Regex("^(?:[01]\\d|2[0-3]):[0-5]\\d$"))
-    }
-
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -77,7 +73,7 @@ fun AddClassScreen(
             value = horarioInicio,
             onValueChange = {
                 horarioInicio = it
-                horarioInicioError = !isValidTime(it)
+                horarioInicioError = !it.matches(Regex("^\\d{2}:\\d{2}$"))
             },
             label = { Text("Horario Inicio (HH:MM)") },
             isError = horarioInicioError,
@@ -90,11 +86,18 @@ fun AddClassScreen(
                 style = MaterialTheme.typography.bodySmall
             )
         }
+        if (horarioInicioError) {
+            Text(
+                text = "El horario debe tener el formato HH:MM",
+                color = MaterialTheme.colorScheme.error,
+                style = MaterialTheme.typography.bodySmall
+            )
+        }
         TextField(
             value = horarioFinal,
             onValueChange = {
                 horarioFinal = it
-                horarioFinalError = !isValidTime(it)
+                horarioFinalError = !it.matches(Regex("^\\d{2}:\\d{2}$"))
             },
             label = { Text("Horario Final (HH:MM)") },
             isError = horarioFinalError,
@@ -103,6 +106,13 @@ fun AddClassScreen(
         if (horarioFinalError) {
             Text(
                 text = "El horario debe estar entre 00:00 y 23:59",
+                color = MaterialTheme.colorScheme.error,
+                style = MaterialTheme.typography.bodySmall
+            )
+        }
+        if (horarioFinalError) {
+            Text(
+                text = "El horario debe tener el formato HH:MM",
                 color = MaterialTheme.colorScheme.error,
                 style = MaterialTheme.typography.bodySmall
             )

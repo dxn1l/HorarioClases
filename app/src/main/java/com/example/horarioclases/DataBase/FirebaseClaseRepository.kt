@@ -2,7 +2,6 @@ package com.example.horarioclases.DataBase
 
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreException
-import com.google.firebase.firestore.QuerySnapshot
 
 class FirebaseClaseRepository {
     private val database = FirebaseFirestore.getInstance()
